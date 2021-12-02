@@ -1,0 +1,28 @@
+@import "../../styles/variables.scss";
+
+.btn {
+    color: red;
+    text-transform: capitalize;
+    border: 0;
+    font-weight: 600;
+    line-height: 1;
+    margin-top: 1.5rem;
+    border-radius: 5px;
+    display: block;
+}
+
+.btn-menu {
+    color: $menu-bgColor;
+    background-color: $menu-btnColor;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    min-height: 2rem;
+    margin: 0;
+    min-width: 8rem;
+    margin: 0 auto;
+
+    &:hover{
+        opacity: .8;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,88 @@
+@import "./variables.scss";
+
+
+body,
+html{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.grid-layout{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 90vh;
+    grid-template-areas: 
+        'menu main main main main'
+        'menu footer footer footer footer'
+    ;
+    height: 100vh;
+}
+
+nav {
+    background-color: $menu-bgColor;
+    grid-area: menu;
+
+    & h1{
+        text-align: center;
+        margin: 0;
+        margin: 20px 0 0 0;
+        font-size: 2em;
+        color: $menu-HeaderColor;
+    }
+
+    & h1, h2 {
+        font-weight: 600;
+    }
+
+    & hr{
+        width: 80%;
+        margin: 20px auto;
+    }
+
+    & h2 {
+        margin: 10px 0 0 10%;
+        font-size: 1.5em;
+        color: $menu-subHeaderColor;
+        
+        &:first-of-type {
+            margin-top: 20px;
+        }
+    }
+
+    & ul {
+       list-style: none;
+
+       & li {
+           margin: 10px;
+           width: fit-content;
+           font-size: 1em;
+           font-weight: none;
+           color: white;
+           display: block;
+
+           &:hover{
+               opacity: .8;
+               cursor: pointer;
+            }
+
+            &:last-child {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
