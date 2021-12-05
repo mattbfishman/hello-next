@@ -61,9 +61,10 @@ nav {
            font-weight: none;
            color: white;
            display: block;
+           text-transform: capitalize;
 
            &:hover{
-               opacity: .8;
+               opacity: .7;
                cursor: pointer;
             }
 

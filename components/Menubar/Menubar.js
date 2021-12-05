@@ -1,5 +1,14 @@
 import Button from '../Button/Button';
+import data from '../../configs/menu';
+import MenuGroup from '../MenuGroup/MenuGroup';
+import map from 'lodash/map';
+
 const Menubar = () => {
+    var {menu} = data,
+        menuItems = map(menu, function(item, idx){
+            return <MenuGroup key={idx} {...item}/>
+        });
+    
     return (
         <nav>
             <div>
@@ -9,30 +18,7 @@ const Menubar = () => {
                     text="Create New Item"
                     type="menu"
                 />
-                <h2>Explore</h2>
-                <ul>
-                    <li>
-                        Items
-                    </li>
-                    <li>
-                        Pages
-                    </li>
-                </ul>
-                <h2>Settings</h2>
-                <ul>
-                    <li>
-                        View Type
-                    </li>
-                    <li>
-                        Users
-                    </li>
-                    <li>
-                        Content
-                    </li>
-                    <li>
-                        Admin
-                    </li>
-                </ul>
+                {menuItems}
             </div>
         </nav>
     )
