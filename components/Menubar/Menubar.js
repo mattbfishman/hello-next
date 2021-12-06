@@ -1,6 +1,7 @@
 import Button from '../Button/Button';
 import data from '../../configs/menu';
 import MenuGroup from '../MenuGroup/MenuGroup';
+import Link from 'next/link';
 import map from 'lodash/map';
 
 const Menubar = () => {
@@ -12,12 +13,20 @@ const Menubar = () => {
     return (
         <nav>
             <div>
-                <h1>Fish CMS</h1>
+                <Link href="/">
+                    <a>
+                        <h1>Fish CMS</h1>
+                    </a>
+                </Link>
                 <hr/>
-                <Button
-                    text="Create New Item"
-                    type="menu"
-                />
+                <Link href="/create">
+                    <a>
+                        <Button
+                            text="Create New Item"
+                            type="menu"
+                        />
+                    </a>
+                </Link>
                 {menuItems}
             </div>
         </nav>

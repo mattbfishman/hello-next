@@ -20,12 +20,19 @@ html{
     height: 100vh;
 }
 
+h1 {
+    text-align: center;
+}
+
+label, option, li {
+    text-transform: capitalize;
+}
+
 nav {
     background-color: $menu-bgColor;
     grid-area: menu;
 
     & h1{
-        text-align: center;
         margin: 0;
         margin: 20px 0 0 0;
         font-size: 2em;
@@ -61,7 +68,6 @@ nav {
            font-weight: none;
            color: white;
            display: block;
-           text-transform: capitalize;
 
            &:hover{
                opacity: .7;
@@ -72,6 +78,10 @@ nav {
                 margin-bottom: 20px;
             }
         }
+    }
+
+    & a {
+        text-decoration: none;
     }
 }
 
