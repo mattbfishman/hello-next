@@ -2,7 +2,7 @@ var PropTypes = require('prop-types');
 import map from 'lodash/map';
 
 function SelectField(props) {
-    var {items, label} = props,
+    var {items, label, update} = props,
         options = map(items, function(item, idx){
             return <SelectOption key={idx} {...item} />
         });
@@ -10,7 +10,7 @@ function SelectField(props) {
     return( 
         <div>
             <label htmlFor={label}>{label}:</label>
-            <select type="text" name={label}>
+            <select type="text" name={label} onChange={update}>
                 {options}
             </select>
         </div>

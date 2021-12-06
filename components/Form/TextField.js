@@ -1,11 +1,12 @@
-var PropTypes = require('prop-types');
+var PropTypes = require('prop-types')
 
 function TextField(props) {
-    var {label} = props;
+    var {label, update} = props;
+
     return( 
         <div>
             <label htmlFor={label}>{label}:</label>
-            <input type="text" name={label}></input>
+            <input type="text" name={label} onChange={update}></input>
         </div>
     )
   }

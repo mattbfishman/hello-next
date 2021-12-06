@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import map from 'lodash/map';
 import SelectField from './SelectField';
 import TextField from './TextField';
@@ -10,11 +11,22 @@ var PropTypes = require('prop-types'),
 
 
 function Form(props) {
+    const [formData, setFormData] = useState({});       
+    const changeFormData = (arg) => {
+        var {target} = arg,
+            {value, name}  = target,
+            newFormData = {...formData};
+
+        newFormData[name] = value;
+        setFormData(newFormData);
+    }
+
+
     var {form} = props,
         formElements = map(form, function(formItem, idx){
             let type      = formItem.type || null,
                 Component = componets[type];
-            return <Component key={idx} {...formItem}/>
+            return <Component key={idx} {...formItem} update={changeFormData}/>
         });
 
     return( 

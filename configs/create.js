@@ -2,7 +2,7 @@ module.exports = {
     "form" : [
         {
             type: 'text',
-            label: 'type'
+            label: 'texttype'
         },
         {
             type: 'select',
