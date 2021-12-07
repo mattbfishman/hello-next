@@ -2,6 +2,7 @@ import { useState } from 'react';
 import map from 'lodash/map';
 import SelectField from './SelectField';
 import TextField from './TextField';
+import styles from '../../styles/form.module.scss';
 
 var PropTypes = require('prop-types'),
     componets = {
@@ -21,7 +22,6 @@ function Form(props) {
         setFormData(newFormData);
     }
 
-
     var {form} = props,
         formElements = map(form, function(formItem, idx){
             let type      = formItem.type || null,
@@ -30,8 +30,10 @@ function Form(props) {
         });
 
     return( 
-        <div>
-            {formElements}
+        <div className={styles.FormContainer}>
+            <div className={styles.InnerContainer}>
+                {formElements}
+            </div>
         </div>
     )
   }

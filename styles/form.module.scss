@@ -1,0 +1,47 @@
+@import './mixins/label';
+@import './mixins/boxSizing';
+@import './variables.scss';
+
+$width: 200px;
+$height: 40px;
+$inputPadding: 2px;
+
+.SelectFieldContainer,
+.TextFieldContainer {
+    flex-direction: column;
+
+    @include label-style();
+    
+    & select, input {
+        @include box-sizing();
+        width: $width;
+        height: $height;
+        background-color: white;
+        border: 1px solid $form-border-color;
+        padding: 0;
+        color: $form-color;
+    }
+
+    & input {
+        padding: $inputPadding;
+        width: calc($width - ($inputPadding) * 2);
+        height: calc($height - ($inputPadding) * 2);
+        
+    }
+}
+
+.SelectFieldContainer,
+.TextFieldContainer,
+.InnerContainer {
+    display: flex;
+}
+
+.FormContainer {
+    margin: 0 50px 50px 50px;
+    background-color: white;
+}
+
+.InnerContainer {
+    padding: 50px;
+    gap: 10px;
+}

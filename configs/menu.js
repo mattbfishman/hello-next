@@ -3,18 +3,18 @@ module.exports = {
         {
             title: "Explore",
             items: [
-                "items",
-                "blogs",
-                "pages"
+                {to: "/explore/items", label: "items"},
+                {to: "/explore/blogs", label: "blogs"},
+                {to: "/explore/pages", label: "pages"}
             ]
         }, 
         {
             title: "Settings",
             items: [
-                "view type",
-                "users",
-                "content",
-                "admin"
+                {to: "/settings/viewType", label: "view type"},
+                {to: "/settings/users", label: "users"},
+                {to: "/settings/content", label: "content"},
+                {to: "/settings/admin", label: "admin"}
             ]
         }
     ]

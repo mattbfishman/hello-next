@@ -2,14 +2,14 @@
 
 
 body,
-html{
+html {
     margin: 0;
     height: 100%;
     width: 100%;
     font-family: 'Open Sans', sans-serif;
 }
 
-.grid-layout{
+.grid-layout {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 90vh;
@@ -32,7 +32,7 @@ nav {
     background-color: $menu-bgColor;
     grid-area: menu;
 
-    & h1{
+    & h1 {
         margin: 0;
         margin: 20px 0 0 0;
         font-size: 2em;
@@ -43,7 +43,7 @@ nav {
         font-weight: 600;
     }
 
-    & hr{
+    & hr{ 
         width: 80%;
         margin: 20px auto;
     }
@@ -69,7 +69,7 @@ nav {
            color: white;
            display: block;
 
-           &:hover{
+           &:hover {
                opacity: .7;
                cursor: pointer;
             }
@@ -87,6 +87,9 @@ nav {
 
 main {
     grid-area: main;
+    background-color: $create-bgColor;
+    overflow-y: auto;
+    height: 100%;
 }
 
 footer {

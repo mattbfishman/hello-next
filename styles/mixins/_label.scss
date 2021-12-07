@@ -1,0 +1,10 @@
+$labelSize: 12px;
+
+@mixin label-style($color: 'black'){
+    label{
+        font-size: $labelSize;
+        color: $color;
+        padding: 0;
+        font-weight: bold;
+    }
+}
