@@ -1,14 +1,13 @@
-import map from 'lodash/map';
-import includes from 'lodash/includes';
-import filter from 'lodash/filter';
-// import styles from '../../styles/form.module.scss';
+import { includes, reduce, map } from 'lodash';
+import Link from 'next/link';
 
-var PropTypes = require('prop-types');
+var PropTypes = require('prop-types'),
+    NAME = 'name';
 
 function TableBody(props) {
-    var {tableData, blacklist} = props,
+    var {tableData, blacklist, type} = props,
         tableRows = map(tableData, function(row, idx){
-            return <TableRow key={idx} row={row} blacklist={blacklist} />
+            return <TableRow key={idx} row={row} blacklist={blacklist} type={type} />
         });
 
     return( 
@@ -20,23 +19,34 @@ function TableBody(props) {
 
 TableBody.propTypes = {
     tableData: PropTypes.array,
-    blacklist : PropTypes.array
+    blacklist : PropTypes.array,
+    type: PropTypes.string
 }
 
 TableBody.defaultProps = {
     tableData: [],
-    blacklist: []
+    blacklist: [],
+    type: ''
 }
 
 function TableRow(props) {
-    var {row, blacklist} = props,
-        rowData = filter(row, function(rowItem, key){
+    var {row, blacklist, type} = props,
+        id = row.id,
+        rowData = reduce(row, function(ret, item, key){
             let inBlacklist = includes(blacklist, key);
-            return !inBlacklist ? rowItem : false;
-        }),
-        items = map(rowData, function(item, idx){
+            if(!inBlacklist){
+                ret[key] = item;
+            }
 
-            return <TableItem key={idx} item={item}/>;
+            return ret;
+        },{}),
+        items = map(rowData, function(item, idx){
+            var path, tableItem;
+            if(idx === NAME && type) {
+                path = `/view/${type}/${id}`;
+            }
+
+            return tableItem = <TableItem key={idx} item={item} path={path}/>;
         });
 
     return <tr>{items}</tr>;
@@ -44,18 +54,31 @@ function TableRow(props) {
 
 TableRow.propTypes = {
     row: PropTypes.object,
-    blacklist: PropTypes.array
+    blacklist: PropTypes.array,
+    type: PropTypes.string
 }
 
 TableRow.defaultProps = {
     tableData: {},
-    blacklist: []
+    blacklist: [],
+    type: ''
 }
 
 function TableItem(props){
-    var {item} = props;
+    var {item, path} = props;
 
-    return <td>{item}</td>;
+    if(path){
+        return (
+            <td>
+                <Link href={path}>
+                    <a>{item}</a>
+                </Link>
+            </td>
+        );
+
+    } else {
+        return <td>{item}</td>;
+    }
 }
 
 TableItem.defaultProps = {

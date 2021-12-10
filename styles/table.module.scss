@@ -1,0 +1,35 @@
+@import './variables.scss';
+
+.TableContainer {
+    margin: 0 50px 50px 50px;
+    background-color: white;
+
+    & table {
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+        border-collapse: collapse;
+        background-color: $table-bgColor;
+
+        & td, th {
+            height: 40px;
+        }
+
+        thead {
+            border-bottom: 1px solid $menu-subHeaderColor;
+        }
+
+        th {
+            color: $menu-subHeaderColor;
+            font-weight: 600;
+        }
+
+        & th, td:first-letter{
+            text-transform: capitalize;
+        }
+
+        tr:nth-child(even){
+            background-color: $even-row-bgColor;
+        }
+    }
+}

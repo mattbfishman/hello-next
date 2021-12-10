@@ -18,6 +18,7 @@ function ExplorePage() {
           tableData={data} 
           headings={headings}
           keyBlacklist={keyBlacklist}
+          type={type}
         />
       </div>
     )
