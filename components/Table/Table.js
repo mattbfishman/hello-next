@@ -8,13 +8,13 @@ var PropTypes = require('prop-types');
 
 
 function Table(props) {
-    var {headings, tableData} = props;
+    var {headings, tableData, keyBlacklist} = props;
 
     return( 
         <div>
             <table>
                 <TableHeadings headings={headings}/>
-                <TableBody tableData={tableData}/>
+                <TableBody tableData={tableData} blacklist={keyBlacklist}/>
             </table>
         </div>
     )
@@ -22,12 +22,14 @@ function Table(props) {
 
 Table.propTypes = {
     headings: PropTypes.array,
-    tableData: PropTypes.array
+    tableData: PropTypes.array,
+    keyBlacklist: PropTypes.array
 }
 
 Table.defaultProps = {
     headings: [],
-    tableData: []
+    tableData: [],
+    keyBlacklist: []
 }
 
 export default Table;

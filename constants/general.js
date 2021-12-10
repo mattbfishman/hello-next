@@ -1,15 +1,12 @@
 import create from '../configs/create';
-import itemHeadings from '../configs/headings/items';
+import items from '../configs/items';
 
 var pageConfigs = {
     create : create,
+    items  : items
 };
 
-var tableHeadings =  {
-    items  : itemHeadings
-}
 
 module.exports = {
-    tableHeadings,
     pageConfigs
 }

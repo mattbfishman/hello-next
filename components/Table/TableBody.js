@@ -1,12 +1,14 @@
 import map from 'lodash/map';
+import includes from 'lodash/includes';
+import filter from 'lodash/filter';
 // import styles from '../../styles/form.module.scss';
 
 var PropTypes = require('prop-types');
 
 function TableBody(props) {
-    var {tableData} = props,
+    var {tableData, blacklist} = props,
         tableRows = map(tableData, function(row, idx){
-            return <TableRow key={idx} row={row} />
+            return <TableRow key={idx} row={row} blacklist={blacklist} />
         });
 
     return( 
@@ -17,38 +19,43 @@ function TableBody(props) {
 }
 
 TableBody.propTypes = {
-    tableData: PropTypes.array
+    tableData: PropTypes.array,
+    blacklist : PropTypes.array
 }
 
 TableBody.defaultProps = {
-    tableData: []
+    tableData: [],
+    blacklist: []
 }
 
 function TableRow(props) {
-    var {row} = props,
-        items = map(row, function(item, idx){
-            return idx !== 'id' ? <TableItem key={idx} item={item}/> : null //change to property or blacklist for certain keys
+    var {row, blacklist} = props,
+        rowData = filter(row, function(rowItem, key){
+            let inBlacklist = includes(blacklist, key);
+            return !inBlacklist ? rowItem : false;
+        }),
+        items = map(rowData, function(item, idx){
+
+            return <TableItem key={idx} item={item}/>;
         });
 
     return <tr>{items}</tr>;
 }
 
 TableRow.propTypes = {
-    row: PropTypes.object
+    row: PropTypes.object,
+    blacklist: PropTypes.array
 }
 
 TableRow.defaultProps = {
-    tableData: {}
+    tableData: {},
+    blacklist: []
 }
 
 function TableItem(props){
     var {item} = props;
 
     return <td>{item}</td>;
-}
-
-TableItem.propTypes = {
-    item: PropTypes.string
 }
 
 TableItem.defaultProps = {
