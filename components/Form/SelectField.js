@@ -10,7 +10,7 @@ function SelectField(props) {
 
     return( 
         <div className={styles.SelectFieldContainer}>
-            <label htmlFor={keyName}>{label}:</label>
+            <label htmlFor={keyName}>{label}</label>
             <select type="text" name={keyName} onChange={update}>
                 {options}
             </select>
@@ -38,13 +38,16 @@ function SelectOption(props){
 }
 
 SelectOption.propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.bool
+    ]),
     title: PropTypes.string,
 }
 
 
 SelectOption.defaultProps = {
-    value: '',
+    value: false,
     title: '',
 }
 

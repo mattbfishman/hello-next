@@ -2,13 +2,15 @@
 @import './mixins/boxSizing';
 @import './variables.scss';
 
-$width: 200px;
+$width: 80%;
 $height: 40px;
-$inputPadding: 2px;
+$inputPaddingHor: 10px;
+$inputPaddingVert: 2px;
 
 .SelectFieldContainer,
 .TextFieldContainer {
     flex-direction: column;
+    width: 100%;
 
     @include label-style();
     
@@ -20,28 +22,36 @@ $inputPadding: 2px;
         border: 1px solid $form-border-color;
         padding: 0;
         color: $form-color;
+        margin: auto;
     }
 
-    & input {
-        padding: $inputPadding;
-        width: calc($width - ($inputPadding) * 2);
-        height: calc($height - ($inputPadding) * 2);
-        
+    & input, select {
+        padding: $inputPaddingVert $inputPaddingHor;
+        width: calc($width - ($inputPaddingHor) * 2);
+        height: calc($height - ($inputPaddingVert) * 2);
     }
 }
 
 .SelectFieldContainer,
-.TextFieldContainer,
-.InnerContainer {
+.TextFieldContainer {
     display: flex;
+}
+
+.InnerContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-row: 1;
+    justify-items: center;
+    padding: 50px;
+    gap: 10px;
+    align-items: center;
+
+    & button {
+        grid-column: span 3;
+    }
 }
 
 .FormContainer {
     margin: 0 50px 50px 50px;
     background-color: white;
-}
-
-.InnerContainer {
-    padding: 50px;
-    gap: 10px;
 }

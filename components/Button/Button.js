@@ -1,22 +1,21 @@
 var PropTypes = require('prop-types');
 import styles from './Button.module.scss';
 
-
 const Button = (props) => {
-    let {text, type} = props;
+    let {label, btnType} = props;
     return (
-        <button className={`${styles.btn} ${styles[`btn-${type}`]}`}>{text}</button>
+        <button className={`${styles.btn} ${styles[`btn-${btnType}`]}`}>{label}</button>
     )
 }
 
 Button.propTypes = {
-    text: PropTypes.string,
-    type: PropTypes.string
+    label: PropTypes.string,
+    btnType: PropTypes.string
 }
 
 Button.defaultProps = {
-    text: 'button',
-    type: 'default'
+    label: 'button',
+    btnType: 'default'
 }
 
 export default Button;

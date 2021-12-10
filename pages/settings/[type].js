@@ -6,7 +6,7 @@ function SettingsPage() {
 
     return (
       <div>
-        <h1>Settings {type}</h1>
+        <h1>{type}</h1>
       </div>
     )
   }

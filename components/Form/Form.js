@@ -2,12 +2,14 @@ import { useState } from 'react';
 import map from 'lodash/map';
 import SelectField from './SelectField';
 import TextField from './TextField';
+import Button from '../Button/Button';
 import styles from '../../styles/form.module.scss';
 
 var PropTypes = require('prop-types'),
     componets = {
         select : SelectField,
-        text   : TextField
+        text   : TextField,
+        button : Button
     }
 
 

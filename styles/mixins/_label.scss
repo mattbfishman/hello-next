@@ -4,7 +4,8 @@ $labelSize: 12px;
     label{
         font-size: $labelSize;
         color: $color;
-        padding: 0;
         font-weight: bold;
+        width: 80%;
+        margin: auto;
     }
 }

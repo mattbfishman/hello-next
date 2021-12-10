@@ -22,8 +22,8 @@ const Menubar = () => {
                 <Link href="/create">
                     <a>
                         <Button
-                            text="Create New Item"
-                            type="menu"
+                            label="Create New Item"
+                            btnType="menu"
                         />
                     </a>
                 </Link>
