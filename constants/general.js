@@ -1,12 +1,14 @@
 import create from '../configs/create';
 import items from '../configs/items';
 
-var pageConfigs = {
+var PAGE_CONFIGS = {
     create : create,
     items  : items
 };
 
+var GRAPHQL_ENDPOINT = 'http://localhost:4000/graphql';
 
 module.exports = {
-    pageConfigs
+    PAGE_CONFIGS,
+    GRAPHQL_ENDPOINT
 }

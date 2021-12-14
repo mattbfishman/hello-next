@@ -1,20 +1,7 @@
 import { useRouter } from 'next/router';
-import { gql } from '@apollo/client';
-import { request } from "graphql-request";
+import helpers from '../../../helpers/general';
+var makeRequest = helpers.makeRequest;
 
-const GET_ITEM = gql`
-   query getItem($id: ID!) {
-      getItem(
-          id: $id
-        ) {
-          id
-          name
-          price
-          type
-          description
-        }
-      }
- `;
 
 function ViewPage(props) {
   let router = useRouter(),
@@ -29,14 +16,13 @@ function ViewPage(props) {
 }
 
 export async function getServerSideProps({query}){
-  console.log(query);
   const {id} = query;
-  console.log(id);
   const variables = {
-    id: "23" 
-   };  
-   const res = await request('http://localhost:4000/graphql', GET_ITEM, variables); // Line 3  
-   const data = res.getItem;  
+    id: id 
+  };  
+  const res = await makeRequest('getItem', variables);
+  const data = res.getItem;  
+  
   return {
     props: {
       data
