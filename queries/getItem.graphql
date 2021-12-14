@@ -1,0 +1,11 @@
+query getItem($id: ID!) {
+    getItem(
+      id: $id
+    ) {
+      id
+      name
+      price
+      type
+      description
+    }
+  }

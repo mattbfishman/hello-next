@@ -1,4 +1,4 @@
-import generateItemModel from './ItemModel/index.js';
+import generateItemModel from './ItemModel/index.mjs';
 
 var models = {
   generateItemModel

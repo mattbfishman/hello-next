@@ -7,7 +7,8 @@ const itemTypeDefs = gql`
         type: String,
         imgSrc: String,
         description: String,
-        id: String
+        id: String,
+        date: String
     }
 
     input ItemInput {

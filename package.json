@@ -1,7 +1,6 @@
 {
   "name": "hello-next",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,6 +15,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "graphql": "^16.1.0",
+    "graphql-request": "^3.7.0",
     "graphql-tag": "^2.12.6",
     "lodash": "^4.17.21",
     "mongoose": "^6.1.1",

@@ -1,4 +1,4 @@
-import itemTypeDefs from './Item/index.js';
+import itemTypeDefs from './Item/index.mjs';
 import { gql } from "apollo-server-express";
 
 const typeDefs = gql`

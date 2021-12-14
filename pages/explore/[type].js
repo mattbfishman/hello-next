@@ -1,15 +1,29 @@
 import { useRouter } from 'next/router';
 import Table from '../../components/Table/Table';
 import helpers from '../../helpers/general';
-import items from '../../mockData/items';
-var getConfig = helpers.getConfig;
+import { gql } from '@apollo/client';
+import { request } from "graphql-request";
 
-function ExplorePage() {
+var getConfig = helpers.getConfig;
+const GET_ITEMS = gql`
+  query getItems {
+    getItems{
+      id
+      name
+      description
+      date
+    }
+  }
+`;
+
+
+function ExplorePage(props) {
   let router                   = useRouter(),
       {type}                   = router.query,
       config                   = getConfig(type),
       {keyBlacklist, headings} = config,
-      {data}                   = items;
+      {data}                   = props;
+      console.log(props);
 
     return (
       <div>
@@ -22,6 +36,16 @@ function ExplorePage() {
         />
       </div>
     )
-  }
+}
+
+export async function getServerSideProps({query}){
+  const res = await request('http://localhost:4000/graphql', GET_ITEMS); // Line 3  
+  const data = res.getItems;  
+ return {
+   props: {
+     data
+   }
+ };
+}
   
-  export default ExplorePage
+export default ExplorePage

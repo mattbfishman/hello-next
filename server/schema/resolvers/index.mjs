@@ -1,4 +1,4 @@
-import {itemQueries, itemMutations} from './Item/index.js';
+import {itemQueries, itemMutations} from './Item/index.mjs';
 
 
 const resolvers = {

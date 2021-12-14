@@ -1,4 +1,4 @@
-import Item from "../../../db/models/ItemModel.js";
+import Item from "../../../db/models/ItemModel.mjs";
 
 const generateItemModel = () => ({
 

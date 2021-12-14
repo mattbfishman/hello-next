@@ -6,7 +6,8 @@ const itemSchema = new mongoose.Schema({
   type: String,
   imgSrc: String,
   description: String,
-  id: String
+  id: String,
+  date: Date
 },
 { timestamps: true });
 

@@ -1,9 +1,9 @@
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
-import typeDefs from "./schema/typeDefs/index.js";
-import resolvers from "./schema/resolvers/index.js";
-import models from "./schema/models/index.js";
-import dbConnection from "./db/connection/index.js";
+import typeDefs from "./schema/typeDefs/index.mjs";
+import resolvers from "./schema/resolvers/index.mjs";
+import models from "./schema/models/index.mjs";
+import dbConnection from "./db/connection/index.mjs";
 import cors from "cors"
 
 const startApolloServer = async () => {
