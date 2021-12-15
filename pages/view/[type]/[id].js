@@ -16,7 +16,7 @@ function ViewPage(props) {
     return (
       <div>
         <h1>{type} {id}</h1>
-        <Form form={formConfig} pageData={data} defaultEdit={false}/>
+        <Form form={formConfig} pageData={data} defaultDisable={true}/>
       </div>
     )
 }

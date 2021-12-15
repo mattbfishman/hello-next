@@ -25,9 +25,9 @@ function Form(props) {
     updateEditState = () => {
         setEditState(!editing);
     },
-    {form, defaultEdit, pageData} = props,
+    {form, defaultDisable, pageData} = props,
     [formData, setFormData]   = useState(pageData),
-    [editing, setEditState]   = useState(!defaultEdit),
+    [editing, setEditState]   = useState(defaultDisable),
     formElements              = map(form, function(formItem, idx){
             let {type, keyName} = formItem,
                 Component       = componets[type],
@@ -38,7 +38,7 @@ function Form(props) {
 
     return( 
         <div className={styles.FormContainer}>
-            <Button type="button" label="Toggle Edit" onClick={updateEditState}/>
+            { defaultDisable ? <Button type="button" label="Toggle Edit" onClick={updateEditState}/> : null }
             <form>
                 <fieldset disabled={editing} className={styles.InnerContainer}>
                     {formElements}
