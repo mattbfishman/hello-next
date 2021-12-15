@@ -1,17 +1,17 @@
-import { useRouter } from 'next/router';
 import Table from '../../components/Table/Table';
 import helpers from '../../helpers/general';
+import constants from '../../constants/general';
+
 
 var getConfig   = helpers.getConfig,
-    makeRequest = helpers.makeRequest;
+    makeRequest = helpers.makeRequest,
+    pageNames   = constants.PAGE_NAMES,
+    EXPLORE     = pageNames.EXPLORE;
 
 
 function ExplorePage(props) {
-  let router                   = useRouter(),
-      {type}                   = router.query,
-      config                   = getConfig(type),
-      {keyBlacklist, headings} = config,
-      {data}                   = props;
+  let {data, config, type}           = props,
+      {keyBlacklist, headings} = config;
 
     return (
       <div>
@@ -26,13 +26,18 @@ function ExplorePage(props) {
     )
 }
 
-export async function getServerSideProps(){
-  const res = await makeRequest('getItems');  
-  const data = res.getItems;  
+export async function getServerSideProps({query}){
+  const {type}      = query,
+        config      = getConfig(type, EXPLORE),
+        {queryName} = config,
+        res         = await makeRequest(queryName),
+        data        = res && res[queryName];
 
   return {
     props: {
-      data
+      data,
+      config,
+      type
     }  
   };
 }

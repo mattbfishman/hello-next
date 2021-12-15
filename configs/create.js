@@ -2,8 +2,7 @@ var formConfig = [
     {
         type: 'text',
         label: 'name',
-        keyName: 'name',
-        placeholder: 'Enter A Name'
+        keyName: 'name'
     },
     {
         type: 'select',

@@ -8,8 +8,10 @@ var keyBlacklist = [
     'id',
 ]
 
+var queryName = 'getItems';
 
 module.exports = {
     keyBlacklist,
-    headings
+    headings,
+    queryName
 }

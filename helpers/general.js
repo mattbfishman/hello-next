@@ -4,8 +4,13 @@ import { request } from "graphql-request";
 
  
 
-function getConfig(type = '') {
-    return PAGE_CONFIGS && PAGE_CONFIGS[type] || {};
+function getConfig(type = '', pageName) {
+    var config;
+    if(pageName){
+        config = PAGE_CONFIGS && PAGE_CONFIGS[pageName];    
+    }
+
+    return config && config[type] || PAGE_CONFIGS && PAGE_CONFIGS[type] || {};
 }
 
 async function makeRequest(name = '', variables = {}){
@@ -15,7 +20,7 @@ async function makeRequest(name = '', variables = {}){
         return await request(GRAPHQL_ENDPOINT, queryName, variables); 
     } 
 
-    return {};
+    return null;
 }
 
 module.exports = {
