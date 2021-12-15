@@ -29,6 +29,10 @@ $inputPaddingVert: 2px;
         padding: $inputPaddingVert $inputPaddingHor;
         width: calc($width - ($inputPaddingHor) * 2);
         height: calc($height - ($inputPaddingVert) * 2);
+        
+        &:disabled {
+            background-color: $disabled-bgColor;
+        }
     }
 }
 
@@ -45,6 +49,7 @@ $inputPaddingVert: 2px;
     padding: 50px;
     gap: 10px;
     align-items: center;
+    border: none;
 
     & button {
         grid-column: span 3;

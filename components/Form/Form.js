@@ -12,33 +12,41 @@ var PropTypes = require('prop-types'),
         button : Button
     }
 
-
-function Form(props) {
-    const [formData, setFormData] = useState({});       
+    
+function Form(props) {     
     const changeFormData = (arg) => {
-        var {target} = arg,
-            {value, name}  = target,
-            newFormData = {...formData};
+        var {target}      = arg,
+            {value, name} = target,
+            newFormData   = {...formData};
 
         newFormData[name] = value;
         setFormData(newFormData);
-    }
+    },
+    updateEditState = () => {
+        setEditState(!editing);
+    },
+    {form, defaultEdit, pageData} = props,
+    [formData, setFormData]   = useState(pageData),
+    [editing, setEditState]   = useState(!defaultEdit),
+    formElements              = map(form, function(formItem, idx){
+            let {type, keyName} = formItem,
+                Component       = componets[type],
+                value           = formData && formData[keyName];
 
-    var {form} = props,
-        formElements = map(form, function(formItem, idx){
-            let type      = formItem.type || null,
-                Component = componets[type];
-            return <Component key={idx} {...formItem} update={changeFormData}/>
+            return <Component key={idx} {...formItem} value={value} update={changeFormData}/>
         });
 
     return( 
         <div className={styles.FormContainer}>
-            <div className={styles.InnerContainer}>
-                {formElements}
-            </div>
+            <Button type="button" label="Toggle Edit" onClick={updateEditState}/>
+            <form>
+                <fieldset disabled={editing} className={styles.InnerContainer}>
+                    {formElements}
+                </fieldset>
+            </form>
         </div>
     )
-  }
+}
 
 Form.propTypes = {
     form: PropTypes.array

@@ -5,6 +5,11 @@ var formConfig = [
         type: 'text',
         label: 'name',
         keyName: 'name'
+    },
+    {
+        type: 'text',
+        label: 'description',
+        keyName: 'description'
     }
 ];
 
