@@ -10,10 +10,10 @@ queries: {
           err ? reject(err) : resolve(item)
       )
     ),
-    getOne: (id) =>
+    getOne: (_id) =>
     new Promise(
       async (resolve, reject) =>
-      await Item.findOne({ id: id }, (err, item) =>{
+      await Item.findOne({ _id: _id }, (err, item) =>{
         err ? reject(err) : resolve(item)
       })
     )
@@ -26,14 +26,14 @@ queries: {
       modifyItem: (body) =>
       new Promise(
         async (resolve, reject) =>
-          await Item.findByIdAndUpdate(body.id, body.query, (err, item) =>
+          await Item.findByIdAndUpdate(body._id, body.query, (err, item) =>
             err ? reject(err) : resolve(item)
             )
       ),
-      deleteItem: (id) =>
+      deleteItem: (_id) =>
         new Promise(
           async (resolve, reject) =>
-            await Item.findByIdAndDelete(id, (err, item) =>
+            await Item.findByIdAndDelete(_id, (err, item) =>
               err ? reject(err) : resolve(item)
             )
        ),

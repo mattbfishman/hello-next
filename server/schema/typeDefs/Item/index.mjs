@@ -7,16 +7,22 @@ const itemTypeDefs = gql`
         type: String,
         imgSrc: String,
         description: String,
-        id: String,
+        _id: String,
         date: Date
     }
 
     input ItemInput {
-        id: String
+        name: String,
+        price: Int,
+        type: String,
+        imgSrc: String,
+        description: String,
+        _id: String,
+        date: Date
     }
 
     input CreateItemInput {
-        id: String,
+        _id: String,
         name: String,
         price: Int,
         type: String,
@@ -25,13 +31,13 @@ const itemTypeDefs = gql`
 
     type Query {
         getItems: [Item],
-        getItem(id: ID!): Item
+        getItem(_id: ID!): Item
     }
 
     type Mutation {
         addItem(item: CreateItemInput): Item
-        modifyItem(id: ID!, query: ItemInput): Item
-        deleteItem(id: ID!): Item
+        modifyItem(_id: ID!, query: ItemInput): Item
+        deleteItem(_id: ID!): Item
     }`;
   
 

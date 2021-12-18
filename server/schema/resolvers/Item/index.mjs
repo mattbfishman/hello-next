@@ -3,7 +3,7 @@ export const itemQueries = {
         await context.models.Item.queries.getAll(),
     getItem: async (parent, args, context) =>
         await context.models.Item.queries.getOne(
-            JSON.parse(JSON.stringify(args.id))
+            JSON.parse(JSON.stringify(args._id))
         ),
 };
 
@@ -18,7 +18,7 @@ export const itemMutations = {
     ),
     deleteItem: async (parent, args, context) =>
     await context.models.Item.mutations.deleteItem(
-        JSON.parse(JSON.stringify(args.id))
+        JSON.parse(JSON.stringify(args._id))
     ),
 };
 

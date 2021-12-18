@@ -3,7 +3,9 @@ import map from 'lodash/map';
 import SelectField from './SelectField';
 import TextField from './TextField';
 import Button from '../Button/Button';
+import FormMenu from './FormMenu';
 import styles from '../../styles/form.module.scss';
+
 
 var PropTypes = require('prop-types'),
     componets = {
@@ -22,7 +24,8 @@ function Form(props) {
         newFormData[name] = value;
         setFormData(newFormData);
     },
-    updateEditState = () => {
+    updateEditState = (e) => {
+        e.preventDefault();
         setEditState(!editing);
     },
     {form, defaultDisable, pageData} = props,
@@ -38,8 +41,8 @@ function Form(props) {
 
     return( 
         <div className={styles.FormContainer}>
-            { defaultDisable ? <Button type="button" label="Toggle Edit" onClick={updateEditState}/> : null }
             <form>
+                <FormMenu btnUpdate={updateEditState} editing={editing} defaultDisable={defaultDisable}/>
                 <fieldset disabled={editing} className={styles.InnerContainer}>
                     {formElements}
                 </fieldset>
@@ -49,11 +52,15 @@ function Form(props) {
 }
 
 Form.propTypes = {
-    form: PropTypes.array
+    form: PropTypes.array,
+    pageData: PropTypes.object,
+    defaultDisable: PropTypes.bool
 }
 
 Form.defaultProps = {
-    form: []
+    form: [],
+    pageData: {},
+    defaultDisable: false
 }
 
 export default Form;

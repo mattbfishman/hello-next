@@ -35,7 +35,7 @@ TableBody.defaultProps = {
 
 function TableRow(props) {
     var {row, blacklist, type} = props,
-        id = row.id,
+        id = row._id,
         rowData = reduce(row, function(ret, item, key){
             let inBlacklist = includes(blacklist, key);
             if(!inBlacklist){

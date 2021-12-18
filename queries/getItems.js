@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 const GET_ITEMS = gql`
   query getItems {
     getItems{
-      id
+      _id
       name
       description
       date

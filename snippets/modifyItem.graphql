@@ -1,0 +1,39 @@
+mutation modifyItem(
+      $id: ID!, 
+      $itemId: String, 
+      $name: String, 
+      $price: Int,
+  		$type: String,
+  		$imgSrc: String,
+  		$description: String,
+  		$date: Date!
+		) 
+    {
+      modifyItem(
+        _id: $id,
+        query: {
+          _id: $itemId
+          name: $name
+          price: $price
+          type: $type
+          imgSrc: $imgSrc
+          description: $description
+          date: $date
+        }
+      ){
+        _id
+          name
+          price
+          type
+        	imgSrc
+        	description
+        	date
+      }
+  }
+
+
+{
+  "id": "233",
+  "name": "testItem",
+  "date": "2011-10-05T14:48:00.000Z"
+}

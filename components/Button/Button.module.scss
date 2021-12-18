@@ -32,3 +32,18 @@
     min-height: 3rem;
     color: white;
 }
+
+.btn-toggle {
+    background-color: $menuLock-bgColor;
+    border-radius: 5px;
+    height: 40px;
+    width: 60px;
+    min-width: 30px;
+    border-radius: 5px;
+
+    &:hover{
+        opacity: .5;
+        cursor: pointer;
+    }
+
+}
