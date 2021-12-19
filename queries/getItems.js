@@ -6,7 +6,8 @@ const GET_ITEMS = gql`
       _id
       name
       description
-      date
+      modified
+      created
     }
   }
 `;

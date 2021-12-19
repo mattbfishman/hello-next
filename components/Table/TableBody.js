@@ -3,10 +3,11 @@ import Link from 'next/link';
 import moment from 'moment';
 import constants from '../../helpers/date';
 
-var PropTypes = require('prop-types'),
-    NAME      = 'name',
-    DATE      = constants.DATE,
-    FULL_DATE = constants.FULL_DATE;
+var PropTypes  = require('prop-types'),
+    NAME       = 'name',
+    FULL_DATE  = constants.FULL_DATE,
+    DATE_TYPES = constants.DATE_TYPES;
+
 
 function TableBody(props) {
     var {tableData, blacklist, type} = props,
@@ -51,7 +52,7 @@ function TableRow(props) {
                 path = `/view/${type}/${id}`;
             }
 
-            if(idx === DATE){
+            if(includes(DATE_TYPES, idx)){
                 item = moment(item).format(FULL_DATE);
             }
 

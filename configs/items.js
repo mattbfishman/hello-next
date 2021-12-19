@@ -1,11 +1,12 @@
 var headings =  [
     'name',
     'description',
-    'date'
+    'modified',
+    'created'
 ];
 
 var keyBlacklist = [
-    'id',
+    '_id',
 ]
 
 var queryName = 'getItems';

@@ -9,7 +9,7 @@ const MODIFY_ITEM = gql`
   		$type: String,
   		$imgSrc: String,
         $description: String,
-  	    $date: Date!
+  	    $modified: Date!
     ) 
     {
         modifyItem(
@@ -21,7 +21,7 @@ const MODIFY_ITEM = gql`
                 type: $type
                 imgSrc: $imgSrc
                 description: $description
-                date: $date
+                modified: $date
             }
         ){
             _id
@@ -30,7 +30,7 @@ const MODIFY_ITEM = gql`
             type
         	imgSrc
         	description
-        	date
+        	modified
         }
     }
 `;

@@ -1,4 +1,4 @@
-import { GraphQLScalarType } from "graphql";
+import { GraphQLScalarType, Kind } from "graphql";
 
 const dateScalar = new GraphQLScalarType({
     name: 'Date',
@@ -12,6 +12,9 @@ const dateScalar = new GraphQLScalarType({
     parseLiteral(ast) {
     if (ast.kind === Kind.INT) {
         return new Date(parseInt(ast.value, 10)); 
+    } else if(ast.kind === Kind.STRING){
+        console.log("HERE");
+        return new Date(ast.value);
     }
     return null; 
     },

@@ -8,7 +8,8 @@ const itemTypeDefs = gql`
         imgSrc: String,
         description: String,
         _id: String,
-        date: Date
+        created: Date,
+        modified: Date
     }
 
     input ItemInput {
@@ -18,7 +19,7 @@ const itemTypeDefs = gql`
         imgSrc: String,
         description: String,
         _id: String,
-        date: Date
+        modified: Date
     }
 
     input CreateItemInput {
@@ -27,6 +28,8 @@ const itemTypeDefs = gql`
         price: Int,
         type: String,
         description: String,
+        created: Date,
+        modified: Date
     }
 
     type Query {

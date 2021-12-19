@@ -18,7 +18,7 @@ mutation modifyItem(
           type: $type
           imgSrc: $imgSrc
           description: $description
-          date: $date
+          modified: $date
         }
       ){
         _id
@@ -27,12 +27,12 @@ mutation modifyItem(
           type
         	imgSrc
         	description
-        	date
+        	created
+        	modified
       }
   }
 
-
-{
+  {
   "id": "233",
   "name": "testItem",
   "date": "2011-10-05T14:48:00.000Z"

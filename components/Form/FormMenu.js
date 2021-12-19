@@ -1,5 +1,6 @@
 import Button from '../Button/Button';
 import { FaLock, FaLockOpen } from "react-icons/fa";
+import styles from '../../styles/form.module.scss';
 
 var PropTypes = require('prop-types');
 
@@ -9,9 +10,9 @@ function FormMenu(props) {
     icon = editing ? FaLock : FaLockOpen;
 
     return( 
-        <div className="formMenu">
-            { defaultDisable ? <Button btnType="toggle" Icon={icon} onClick={btnUpdate}/> : null }
+        <div className={styles.formMenu}>
             <Button btnType="save" label="save changes"></Button>
+            { defaultDisable ? <Button btnType="toggle" Icon={icon} onClick={btnUpdate}/> : null }
         </div>
     )
 }

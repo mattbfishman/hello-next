@@ -10,6 +10,9 @@ const GET_ITEM = gql`
           price
           type
           description
+          created
+          modified
+          imgSrc
         }
     }
  `;
