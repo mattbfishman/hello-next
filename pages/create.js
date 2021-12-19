@@ -5,12 +5,12 @@ var getConfig = helpers.getConfig,
 
 function Create() {
     var data         = getConfig(CREATE),
-        {formConfig} = data;
+        {formConfig, queryNames, variables, validTypes, typeKey} = data;
 
     return( 
         <div>
             <h1>Create</h1>
-            <Form form={formConfig}/>
+            <Form form={formConfig} variables={variables} queries={queryNames} validTypes={validTypes} typeKey={typeKey} create={true}/>
         </div>
     )
   }

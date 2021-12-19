@@ -17,7 +17,7 @@ function ViewPage(props) {
     return (
       <div>
         <h1>{type} {id}</h1>
-        <Form form={formConfig} pageData={data} variables={variables} modifyQuery={modify} defaultDisable={true}/>
+        <Form form={formConfig} pageData={data} variables={variables} queries={modify} defaultDisable={true}/>
       </div>
     )
 }

@@ -29,20 +29,23 @@ function mapVariables(variables = [], object = {}){
     forEach(variables, function(variable){
         let value = object && object[variable];
 
-        if(value){
-            if(variable === MODIFIED){
-                ret[variable] = new Date().toISOString();
-            } else {
-                ret[variable] = value;
-            }
+        if(variable === MODIFIED){
+            ret[variable] = new Date().toISOString();
+        } else if(value){
+            ret[variable] = value;
         }
     });
 
     return ret;
 }
 
+function generateID() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
 module.exports = {
     getConfig,
     makeRequest,
-    mapVariables
+    mapVariables,
+    generateID
 }
