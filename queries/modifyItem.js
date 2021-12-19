@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 const MODIFY_ITEM = gql`
     mutation modifyItem(
-        $id: ID!, 
+        $_id: ID!, 
         $itemId: String, 
         $name: String, 
         $price: Int,
@@ -13,7 +13,7 @@ const MODIFY_ITEM = gql`
     ) 
     {
         modifyItem(
-            _id: $id,
+            _id: $_id,
             query: {
                 _id: $itemId
                 name: $name
@@ -21,7 +21,7 @@ const MODIFY_ITEM = gql`
                 type: $type
                 imgSrc: $imgSrc
                 description: $description
-                modified: $date
+                modified: $modified
             }
         ){
             _id

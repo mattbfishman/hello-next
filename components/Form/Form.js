@@ -5,14 +5,16 @@ import TextField from './TextField';
 import Button from '../Button/Button';
 import FormMenu from './FormMenu';
 import styles from '../../styles/form.module.scss';
-
+import helpers from '../../helpers/general';
 
 var PropTypes = require('prop-types'),
     componets = {
         select : SelectField,
         text   : TextField,
         button : Button
-    }
+    },
+    mapVariables = helpers.mapVariables,
+    makeRequest  = helpers.makeRequest;
 
     
 function Form(props) {     
@@ -28,10 +30,21 @@ function Form(props) {
         e.preventDefault();
         setEditState(!editing);
     },
+    submitForm = (e) => {
+        e.preventDefault();
+        if(formUpdated){
+            var {variables, modifyQuery} = props,
+                mappedVariables = mapVariables(variables, formData);
+            makeRequest(modifyQuery, mappedVariables);
+            setFormUpdatedState(false);
+            updateEditState(e);
+        }
+    },
     {form, defaultDisable, pageData} = props,
-    [formData, setFormData]   = useState(pageData),
-    [editing, setEditState]   = useState(defaultDisable),
-    formElements              = map(form, function(formItem, idx){
+    [formData, setFormData]    = useState(pageData),
+    [editing, setEditState]    = useState(defaultDisable),
+    [formUpdated, setFormUpdatedState] = useState(false),
+    formElements               = map(form, function(formItem, idx){
             let {type, keyName} = formItem,
                 Component       = componets[type],
                 value           = formData && formData[keyName];
@@ -41,8 +54,8 @@ function Form(props) {
 
     return( 
         <div className={styles.FormContainer}>
-            <form>
-                <FormMenu btnUpdate={updateEditState} editing={editing} defaultDisable={defaultDisable}/>
+            <form onChange={() => setFormUpdatedState(true)}>
+                <FormMenu btnUpdate={updateEditState} editing={editing} submit={submitForm} defaultDisable={defaultDisable}/>
                 <fieldset disabled={editing} className={styles.InnerContainer}>
                     {formElements}
                 </fieldset>
@@ -54,13 +67,15 @@ function Form(props) {
 Form.propTypes = {
     form: PropTypes.array,
     pageData: PropTypes.object,
-    defaultDisable: PropTypes.bool
+    defaultDisable: PropTypes.bool,
+    variables: PropTypes.array
 }
 
 Form.defaultProps = {
     form: [],
     pageData: {},
-    defaultDisable: false
+    defaultDisable: false,
+    variables: []
 }
 
 export default Form;

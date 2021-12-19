@@ -1,5 +1,6 @@
 const FULL_DATE = 'MMM Do YYYY, h:mm a';
 const DATE = 'date';
+const MODIFIED = 'modified';
 
 const DATE_TYPES = [
     'date',
@@ -10,5 +11,6 @@ const DATE_TYPES = [
 module.exports = {
     DATE,
     FULL_DATE,
-    DATE_TYPES
+    DATE_TYPES,
+    MODIFIED
 }

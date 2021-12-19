@@ -28,13 +28,15 @@ function TextField(props) {
 TextField.propTypes = {
     label: PropTypes.string,
     keyName: PropTypes.string,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    input: PropTypes.string
 }
 
 TextField.defaultProps = {
     label: '',
     keyName: '',
-    placeholder: ''
+    placeholder: '',
+    value: ''
 }
 
 export default TextField;

@@ -10,33 +10,36 @@ var makeRequest = helpers.makeRequest,
 
 
 function ViewPage(props) {
-    let {type, id, data, config} = props,
-        {formConfig}             = config;
+    let {type, id, data, config, queryNames} = props,
+        {modify} = queryNames,
+        {formConfig, variables}  = config;
 
     return (
       <div>
         <h1>{type} {id}</h1>
-        <Form form={formConfig} pageData={data} defaultDisable={true}/>
+        <Form form={formConfig} pageData={data} variables={variables} modifyQuery={modify} defaultDisable={true}/>
       </div>
     )
 }
 
 export async function getServerSideProps({query}){
-  const {id, type}  = query,
-        variables   = {
+  const {id, type} = query,
+        variables  = {
           id: id
         },
-        config      = getConfig(type, VIEW),
-        {queryName} = config,
-        res         = await makeRequest(queryName, variables),
-        data        = res && res[queryName];
+        config       = getConfig(type, VIEW),
+        {queryNames} = config,
+        {get}        = queryNames,
+        res          = await makeRequest(get, variables),
+        data         = res && res[get];
 
   return {
     props: {
       data,
       id,
       type,
-      config
+      config,
+      queryNames
     }
   };
 }
