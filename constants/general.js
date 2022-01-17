@@ -1,6 +1,7 @@
 import create from '../configs/create';
 import items from '../configs/items';
 import item from '../configs/item';
+import login from '../configs/login';
 
 var PAGE_CONFIGS = {
     create : create,
@@ -9,7 +10,8 @@ var PAGE_CONFIGS = {
     },
     explore : {
         items: items
-    }
+    },
+    login   : login
 };
 
 var PAGE_NAMES = {

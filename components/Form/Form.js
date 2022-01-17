@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {map, isObject, includes} from 'lodash';
 import SelectField from './SelectField';
+import PasswordField from './PasswordField';
 import TextField from './TextField';
 import Button from '../Button/Button';
 import FormMenu from './FormMenu';
@@ -12,7 +13,8 @@ var PropTypes = require('prop-types'),
     componets = {
         select : SelectField,
         text   : TextField,
-        button : Button
+        button : Button,
+        password: PasswordField
     };
 
     
@@ -62,22 +64,22 @@ function Form(props) {
             }
         }
     },
-    {form, defaultDisable, pageData} = props,
+    {form, defaultDisable, pageData, hideFormMenu, className} = props,
     [formData, setFormData]    = useState(pageData),
     [editing, setEditState]    = useState(defaultDisable),
     [formUpdated, setFormUpdatedState] = useState(false),
+    formClassName = className ? className : styles.FormContainer,
     formElements               = map(form, function(formItem, idx){
             let {type, keyName} = formItem,
                 Component       = componets[type],
                 value           = formData && formData[keyName] || '';
-
-            return <Component key={idx} {...formItem} value={value} update={changeFormData}/>
+            return Component ? <Component key={idx} {...formItem} value={value} update={changeFormData}/> : null;
         });
 
     return( 
-        <div className={styles.FormContainer}>
+        <div className={formClassName}>
             <form onChange={() => setFormUpdatedState(true)}>
-                <FormMenu btnUpdate={updateEditState} editing={editing} submit={submitForm} defaultDisable={defaultDisable}/>
+                {!hideFormMenu && <FormMenu btnUpdate={updateEditState} editing={editing} submit={submitForm} defaultDisable={defaultDisable}/>}
                 <fieldset disabled={editing} className={styles.InnerContainer}>
                     {formElements}
                 </fieldset>
@@ -91,7 +93,9 @@ Form.propTypes = {
     pageData: PropTypes.object,
     defaultDisable: PropTypes.bool,
     variables: PropTypes.array,
-    create: PropTypes.bool
+    create: PropTypes.bool,
+    hideFormMenu: PropTypes.bool,
+    className: PropTypes.string
 }
 
 Form.defaultProps = {
@@ -99,7 +103,8 @@ Form.defaultProps = {
     pageData: {},
     defaultDisable: false,
     variables: [],
-    create: false
+    create: false,
+    hideFormMenu: false
 }
 
 export default Form;

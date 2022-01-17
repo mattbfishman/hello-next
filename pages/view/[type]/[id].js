@@ -10,13 +10,13 @@ var makeRequest = helpers.makeRequest,
 
 
 function ViewPage(props) {
-    let {type, id, data, config, queryNames} = props,
+    let {type, data, config, queryNames} = props,
         {modify} = queryNames,
         {formConfig, variables}  = config;
 
     return (
       <div>
-        <h1>{type} {id}</h1>
+        <h1>{type}</h1>
         <Form form={formConfig} pageData={data} variables={variables} queries={modify} defaultDisable={true}/>
       </div>
     )
@@ -36,7 +36,6 @@ export async function getServerSideProps({query}){
   return {
     props: {
       data,
-      id,
       type,
       config,
       queryNames

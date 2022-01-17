@@ -10,7 +10,7 @@ var PropTypes  = require('prop-types'),
     DATE_TYPES = constants.DATE_TYPES;
 
 
-function TextField(props) {
+function PasswordField(props) {
     var {label, update, keyName, placeholder, value, span} = props,
         isDate = includes(DATE_TYPES, keyName),
         style  = {};
@@ -27,22 +27,22 @@ function TextField(props) {
     return( 
         <div className={styles.TextFieldContainer} style={style}>
             <label htmlFor={keyName}>{label}</label>
-            <input type="text" disabled={isDate} name={keyName} onChange={update} placeholder={placeholder} value={value}></input>
+            <input type="password" disabled={isDate} name={keyName} onChange={update} placeholder={placeholder} value={value}></input>
         </div>
     )
 }
 
-TextField.propTypes = {
+PasswordField.propTypes = {
     label: PropTypes.string,
     keyName: PropTypes.string,
     placeholder: PropTypes.string,
 }
 
-TextField.defaultProps = {
+PasswordField.defaultProps = {
     label: '',
     keyName: '',
     placeholder: '',
 }
 
-export default TextField;
+export default PasswordField;
   

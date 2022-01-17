@@ -13,7 +13,6 @@ const dateScalar = new GraphQLScalarType({
     if (ast.kind === Kind.INT) {
         return new Date(parseInt(ast.value, 10)); 
     } else if(ast.kind === Kind.STRING){
-        console.log("HERE");
         return new Date(ast.value);
     }
     return null; 

@@ -1,0 +1,37 @@
+@import './mixins/label';
+// @import './mixins/boxSizing';
+// @import './variables.scss';
+
+// $width: 80%;
+// $height: 40px;
+// $inputPaddingHor: 10px;
+// $inputPaddingVert: 2px;
+
+.InnerLoginContainer,
+.LoginContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.InnerLoginContainer {
+    width: 800px;
+    height: 400px;
+    background-color: darkblue;
+ }
+
+.LoginContainer{
+    min-height: 100vh;
+    background-color: lightblue;
+}
+
+.LoginForm {
+    margin: 0;
+    height: 90%;
+    width: 90%;
+    background-color: white;
+
+    // & form{
+    //     background-color: red;
+    // }
+}
