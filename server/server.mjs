@@ -21,7 +21,8 @@ const startApolloServer = async () => {
     context: ({ req }) => {
       return {
         models: {
-          Item: models.generateItemModel()
+          Item: models.generateItemModel(),
+          User: models.generateUserModel()
         },
       };
     },

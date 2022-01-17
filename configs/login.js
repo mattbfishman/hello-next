@@ -14,6 +14,11 @@ formConfig = [
         keyName: 'password',
         span: 'all'
     },
+    {
+        type: 'button',
+        label: 'submit',
+        btnType: 'submit'
+    },
 ],
 variables = [
     'username',

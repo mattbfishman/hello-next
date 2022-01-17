@@ -6,16 +6,17 @@ import TextField from './TextField';
 import Button from '../Button/Button';
 import FormMenu from './FormMenu';
 import styles from '../../styles/form.module.scss';
-import { useRouter } from 'next/router';
 import {generateID, makeRequest, mapVariables} from '../../helpers/general';
 
 var PropTypes = require('prop-types'),
     componets = {
-        select : SelectField,
-        text   : TextField,
-        button : Button,
+        select  : SelectField,
+        text    : TextField,
+        button  : Button,
         password: PasswordField
-    };
+    },
+    BUTTON = 'button',
+    SUBMIT = 'submit';
 
     
 function Form(props) {     
@@ -34,7 +35,7 @@ function Form(props) {
     submitForm = (e) => {
         e.preventDefault();
         if(formUpdated){
-            var {variables, queries, validTypes, typeKey, create} = props,
+            var {variables, queries, validTypes, typeKey, create, setUser} = props,
                 mappedVariables = mapVariables(variables, formData),
                 type = typeKey && formData && formData[typeKey],
                 query, isValid;
@@ -62,6 +63,10 @@ function Form(props) {
             if(create){
                 setFormData({});
             }
+
+            if(setUser){
+                setUser({user: true})
+            }
         }
     },
     {form, defaultDisable, pageData, hideFormMenu, className} = props,
@@ -72,7 +77,16 @@ function Form(props) {
     formElements               = map(form, function(formItem, idx){
             let {type, keyName} = formItem,
                 Component       = componets[type],
-                value           = formData && formData[keyName] || '';
+                value           = formData && formData[keyName] || '',
+                btnType;
+
+                if(type === BUTTON){
+                    btnType = formItem.btnType;
+                    if(btnType === SUBMIT){
+                        return  <Component key={idx} {...formItem} value={value} onClick={submitForm}/>
+                    }
+                }
+
             return Component ? <Component key={idx} {...formItem} value={value} update={changeFormData}/> : null;
         });
 

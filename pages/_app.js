@@ -10,12 +10,11 @@ function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    //getUser
-  
+    //try get before routing
   }, []);
 
   if(!user){
-    return <Login/>
+    return <Login setUser={setUser}/>
   }
 
   return (

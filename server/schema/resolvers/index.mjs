@@ -1,5 +1,6 @@
 import dateScalar from '../scalars/date.mjs';
 import {itemQueries, itemMutations} from './Item/index.mjs';
+import { userMutations } from './User/index.mjs';
 
 
 const resolvers = {
@@ -7,7 +8,8 @@ const resolvers = {
         ...itemQueries
     },
     Mutation: {
-        ...itemMutations
+        ...itemMutations,
+        ...userMutations
     },
     Date: dateScalar
   };
