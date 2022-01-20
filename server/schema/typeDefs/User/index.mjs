@@ -13,7 +13,7 @@ const userTypeDefs = gql`
 
     type Mutation {
         login(user: UserInput): User
-        register(user: UserInput): User
+        register(user: UserInput): Boolean
     }`;
   
 
