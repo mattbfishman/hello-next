@@ -11,8 +11,12 @@ const userTypeDefs = gql`
         password: String
     }
 
+    type UserInfo {
+        username: String
+    }
+
     type Mutation {
-        login(user: UserInput): User
+        login(user: UserInput): UserInfo
         register(user: UserInput): Boolean
     }`;
   

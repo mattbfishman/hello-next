@@ -10,4 +10,8 @@ const generateHashedPassword = async (password) => {
     });
 }
 
-export {  generateHashedPassword };
+const checkHashedPassword = (password = '', hashedPassword = '') => {
+  return bcrypt.compareSync(password, hashedPassword);
+}
+
+export {  generateHashedPassword, checkHashedPassword };

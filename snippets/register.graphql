@@ -1,0 +1,8 @@
+ mutation Register{
+        register(
+            user:{
+                username:"vvvv",
+                password:"test"
+            }
+        )
+    }
