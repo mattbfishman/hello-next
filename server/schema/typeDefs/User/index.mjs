@@ -3,7 +3,8 @@ import { gql } from "apollo-server-express";
 const userTypeDefs = gql`
     type User {
         username: String,
-        password: String
+        password: String,
+        count: Int
     }
 
     input UserInput {

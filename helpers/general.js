@@ -1,8 +1,9 @@
 import {PAGE_CONFIGS, GRAPHQL_ENDPOINT} from '../constants/general';
 import {MODIFIED} from './date';
 import {QUERIES} from '../constants/api';
-import { request } from "graphql-request";
+import { GraphQLClient } from "graphql-request";
 import { forEach } from 'lodash';
+var graphQLClient;
 
 function getConfig(type = '', pageName) {
     var config;
@@ -16,8 +17,15 @@ function getConfig(type = '', pageName) {
 async function makeRequest(name = '', variables = {}){
     var queryName = QUERIES[name];
 
+    if(!graphQLClient){
+        graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT, {
+            credentials: 'include',
+            mode: 'cors',
+        })
+    }
+
     if(queryName) {
-        return await request(GRAPHQL_ENDPOINT, queryName, variables); 
+        return await graphQLClient.request(queryName, variables); 
     } 
 
     return null;

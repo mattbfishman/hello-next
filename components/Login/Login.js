@@ -9,13 +9,13 @@ var getConfig = helpers.getConfig,
 const Login = (props, context) => {
     var {setUser}    = props,
         data         = getConfig(LOGIN),
-        {formConfig, variables} = data;
+        {formConfig, variables, queryNames} = data;
 
 
     return( 
         <div className={styles.LoginContainer}>
             <div className={styles.InnerLoginContainer}>
-                <Form form={formConfig} variables={variables} create={false} hideFormMenu={true} className={styles.LoginForm} setUser={setUser}/>
+                <Form form={formConfig} variables={variables} queries={queryNames} create={false} hideFormMenu={true} className={styles.LoginForm} setUser={setUser}/>
             </div>
         </div>
     )

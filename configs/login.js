@@ -1,6 +1,4 @@
-var queryNames = {
-    item: 'addItem'
-},
+var queryNames = 'login',
 formConfig = [
     {
         type: 'text',
@@ -26,6 +24,7 @@ variables = [
 ];
 
 module.exports = {
-formConfig,
-variables
+    formConfig,
+    variables,
+    queryNames
 }

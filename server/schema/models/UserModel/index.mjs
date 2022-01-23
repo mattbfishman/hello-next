@@ -1,7 +1,8 @@
-import User from "../../../db/models/UserModel.mjs";
+import User from '../../../db/models/UserModel.mjs';
 import { generateHashedPassword, checkHashedPassword } from '../../../helpers/password.mjs';
+import jwt from 'jsonwebtoken';
 
-const generateUserModel = () => ({
+const generateUserModel = (req, res) => ({
 
   mutations: {
     login: (user) => {
@@ -12,14 +13,35 @@ const generateUserModel = () => ({
           }).clone(),
           password = user.password || '',
           username = user.username || '',
+          count = user.count || 1,
           hashedsPassword = retUser.password || '',
-          passwordCheck = checkHashedPassword(password, hashedsPassword);
+          passwordCheck = checkHashedPassword(password, hashedsPassword),
+          refreshSecret = process.env.JWT_REFRESH_SECRET,
+          accessSecret = process.env.JWT_ACCESS_SECRET,
+          refreshToken, accessToken;
+          
 
-          if(passwordCheck){
-            resolve({username: username})
-          } else {
+          if(!passwordCheck){
             reject((new Error("Username or Password is incorrect")));
           }
+
+          refreshToken = jwt.sign(
+            { payload: { username: username, count: count } },
+            refreshSecret,
+            {
+              expiresIn: "7d"
+            }
+          );
+
+          accessToken = jwt.sign({ userId: user.id }, accessSecret, {
+            expiresIn: "15min"
+          });
+
+          res.cookie("refresh-token", refreshToken);
+          res.cookie("access-token", accessToken);
+          
+          resolve({username: username})
+
         }
       )
     },
@@ -44,7 +66,7 @@ const generateUserModel = () => ({
           if(!exists){
             hash = await generateHashedPassword(password);
             if(hash){
-              new User({username:username, password: hash}).save((err) => (err ? reject(false) : resolve(true)))
+              new User({username:username, password: hash, count: 1}).save((err) => (err ? reject(false) : resolve(true)))
             } else {
               reject(false);
             }

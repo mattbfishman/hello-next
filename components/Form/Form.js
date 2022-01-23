@@ -65,7 +65,7 @@ function Form(props) {
             }
 
             if(setUser){
-                setUser({user: true})
+                setUser({user: true})//make this based on request
             }
         }
     },
