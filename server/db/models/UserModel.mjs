@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
-  count: Number
+  permissions: Array,
+  roles: Array
 },
 { timestamps: true });
 

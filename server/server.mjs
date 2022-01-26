@@ -7,7 +7,8 @@ import dbConnection from "./db/connection/index.mjs";
 import cookieParser from 'cookie-parser';
 import cors from "cors"
 import pkg from 'jsonwebtoken';
-const { verify } = pkg;
+const { verify } = pkg,
+      corsConfig = {credentials: true, origin: 'http://localhost:3000'};
 
 
 const startApolloServer = async () => {
@@ -17,14 +18,17 @@ const startApolloServer = async () => {
 
   const app = express();
   
-  app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+  app.use(cors(corsConfig));
 
   app.use(cookieParser());
   app.use((req, _, next) => {
     const accessToken = req.cookies["access-token"];
+    const accessSecret = process.env.JWT_ACCESS_SECRET;
     try {
-      const data = verify(accessToken, ACCESS_TOKEN_SECRET);
-      req.username = data.username;
+      const data = verify(accessToken, accessSecret);
+      const {payload} = data;
+      const {username} = payload;
+      req.username = username;
     } catch {}
     next();
   });
@@ -32,10 +36,7 @@ const startApolloServer = async () => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    cors: {
-      origin: 'http://localhost:3000',
-      credentials: true
-    },
+    cors: corsConfig,
     context: ({ req, res }) => {
       return {
         models: {
@@ -48,10 +49,7 @@ const startApolloServer = async () => {
   await server.start();
 
   server.applyMiddleware({ app, 
-    cors: {
-      origin: 'http://localhost:3000',
-      credentials: true
-    }, 
+    cors: corsConfig, 
   });
 
   app.use((req, res) => {

@@ -4,7 +4,8 @@ const userTypeDefs = gql`
     type User {
         username: String,
         password: String,
-        count: Int
+        roles: [Roles],
+        permissions: [Roles]
     }
 
     input UserInput {
@@ -12,14 +13,26 @@ const userTypeDefs = gql`
         password: String
     }
 
+    enum Roles {
+        admin
+    }
+
+    enum Permissions {
+        read_any_account,
+        read_own_account
+    }
+
     type UserInfo {
-        username: String
+        username: String,
+        roles: [Roles],
+        permissions: [Permissions]
     }
 
     type Mutation {
         login(user: UserInput): UserInfo
         register(user: UserInput): Boolean
     }`;
+
   
 
 export default userTypeDefs;

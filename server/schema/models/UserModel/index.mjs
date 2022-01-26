@@ -9,13 +9,12 @@ const generateUserModel = (req, res) => ({
       return new Promise (
         async (resolve, reject) => {
           var retUser = await User.findOne({ username: user.username }, (err) => {
-            err ? reject(err) : resolve({username: user.username, passwordHash: user.password})
+            err ? reject(err) : resolve({user})
           }).clone(),
-          password = user.password || '',
-          username = user.username || '',
-          count = user.count || 1,
-          hashedsPassword = retUser.password || '',
-          passwordCheck = checkHashedPassword(password, hashedsPassword),
+          {password, username} = user,
+          hashedPassword = retUser.password,
+          {roles, permissions} = retUser,
+          passwordCheck = checkHashedPassword(password, hashedPassword),
           refreshSecret = process.env.JWT_REFRESH_SECRET,
           accessSecret = process.env.JWT_ACCESS_SECRET,
           refreshToken, accessToken;
@@ -26,21 +25,21 @@ const generateUserModel = (req, res) => ({
           }
 
           refreshToken = jwt.sign(
-            { payload: { username: username, count: count } },
+            {  username, roles, permissions },
             refreshSecret,
             {
               expiresIn: "7d"
             }
           );
 
-          accessToken = jwt.sign({ userId: user.id }, accessSecret, {
+          accessToken = jwt.sign({ username, roles, permissions }, accessSecret, {
             expiresIn: "15min"
           });
 
           res.cookie("refresh-token", refreshToken);
           res.cookie("access-token", accessToken);
           
-          resolve({username: username})
+          resolve({username, roles, permissions})
 
         }
       )
@@ -66,7 +65,7 @@ const generateUserModel = (req, res) => ({
           if(!exists){
             hash = await generateHashedPassword(password);
             if(hash){
-              new User({username:username, password: hash, count: 1}).save((err) => (err ? reject(false) : resolve(true)))
+              new User({username:username, password: hash, roles: ['admin'], permissions: ["read_any_account", "read_own_account"]}).save((err) => (err ? reject(false) : resolve(true)))
             } else {
               reject(false);
             }
