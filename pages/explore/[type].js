@@ -1,6 +1,7 @@
 import Table from '../../components/Table/Table';
 import helpers from '../../helpers/general';
 import constants from '../../constants/general';
+import cookie from 'cookie';
 
 
 var getConfig   = helpers.getConfig,
@@ -26,12 +27,15 @@ function ExplorePage(props) {
     )
 }
 
-export async function getServerSideProps({query}){
-  const {type}      = query,
+export async function getServerSideProps({query, req}){
+  const cookies = req.headers.cookie,
+        parsed   = cookie.parse(cookies),
+        accessToken = parsed['access-token'],
+        {type}      = query,
         config      = getConfig(type, EXPLORE),
         {queryName} = config,
-        res         = await makeRequest(queryName),
-        data        = res && res[queryName];
+        request     = await makeRequest(queryName),
+        data        = request && request[queryName];
 
   return {
     props: {

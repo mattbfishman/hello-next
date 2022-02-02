@@ -65,6 +65,7 @@ const generateUserModel = (req, res) => ({
           if(!exists){
             hash = await generateHashedPassword(password);
             if(hash){
+              //todo update roles to be a lookup for permissions. Default to admin for now but future setup user roles
               new User({username:username, password: hash, roles: ['admin'], permissions: ["read_any_account", "read_own_account"]}).save((err) => (err ? reject(false) : resolve(true)))
             } else {
               reject(false);

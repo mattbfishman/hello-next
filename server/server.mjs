@@ -17,17 +17,19 @@ const startApolloServer = async () => {
     .catch((err) => console.log(err));
 
   const app = express();
+  app.use(cookieParser());
+
   
   app.use(cors(corsConfig));
 
-  app.use(cookieParser());
   app.use((req, _, next) => {
+    console.log(req);
     const accessToken = req.cookies["access-token"];
     const accessSecret = process.env.JWT_ACCESS_SECRET;
+    console.log(accessToken);
     try {
       const data = verify(accessToken, accessSecret);
-      const {payload} = data;
-      const {username} = payload;
+      const {username, roles, permissions} = data;
       req.username = username;
     } catch {}
     next();
@@ -40,7 +42,7 @@ const startApolloServer = async () => {
     context: ({ req, res }) => {
       return {
         models: {
-          Item: models.generateItemModel(),
+          Item: models.generateItemModel(req),
           User: models.generateUserModel(req, res)
         }
       };

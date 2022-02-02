@@ -21,8 +21,10 @@ async function makeRequest(name = '', variables = {}){
         graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT, {
             credentials: 'include',
             mode: 'cors',
-        })
+        });
     }
+
+    console.log(variables);
 
     if(queryName) {
         return await graphQLClient.request(queryName, variables); 
