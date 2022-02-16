@@ -28,16 +28,15 @@ function ExplorePage(props) {
 }
 
 export async function getServerSideProps({query, req}){
-  const cookies     = req.headers.cookie,
-        parsed      = cookie.parse(cookies),
-        accessToken = parsed['access-token'],
-        {type}      = query,
-        config      = getConfig(type, EXPLORE),
-        {queryName} = config,
-        request     = await makeRequest(queryName, null, accessToken),
-        data        = request && request[queryName];
-
-    console.log(accessToken);
+  const cookies      = req.headers.cookie || '',
+        parsed       = cookie.parse(cookies),
+        accessToken  = parsed['access-token'],
+        refreshToken = parsed['refresh-token'],
+        {type}       = query,
+        config       = getConfig(type, EXPLORE),
+        {queryName}  = config,
+        request      = await makeRequest(queryName, null, {access: accessToken, refresh: refreshToken}),
+        data         = request && request[queryName];
 
   return {
     props: {
