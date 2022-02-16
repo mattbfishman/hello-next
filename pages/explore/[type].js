@@ -11,7 +11,7 @@ var getConfig   = helpers.getConfig,
 
 
 function ExplorePage(props) {
-  let {data, config, type}           = props,
+  let {data, config, type}     = props,
       {keyBlacklist, headings} = config;
 
     return (
@@ -28,14 +28,16 @@ function ExplorePage(props) {
 }
 
 export async function getServerSideProps({query, req}){
-  const cookies = req.headers.cookie,
-        parsed   = cookie.parse(cookies),
+  const cookies     = req.headers.cookie,
+        parsed      = cookie.parse(cookies),
         accessToken = parsed['access-token'],
         {type}      = query,
         config      = getConfig(type, EXPLORE),
         {queryName} = config,
-        request     = await makeRequest(queryName),
+        request     = await makeRequest(queryName, null, accessToken),
         data        = request && request[queryName];
+
+    console.log(accessToken);
 
   return {
     props: {

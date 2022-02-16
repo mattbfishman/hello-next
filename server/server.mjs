@@ -5,10 +5,9 @@ import resolvers from "./schema/resolvers/index.mjs";
 import models from "./schema/models/index.mjs";
 import dbConnection from "./db/connection/index.mjs";
 import cookieParser from 'cookie-parser';
+import isAuth from './middleware/isAuth.mjs';
 import cors from "cors"
-import pkg from 'jsonwebtoken';
-const { verify } = pkg,
-      corsConfig = {credentials: true, origin: 'http://localhost:3000'};
+const corsConfig = {credentials: true, origin: 'http://localhost:3000'};
 
 
 const startApolloServer = async () => {
@@ -22,18 +21,7 @@ const startApolloServer = async () => {
   
   app.use(cors(corsConfig));
 
-  app.use((req, _, next) => {
-    console.log(req);
-    const accessToken = req.cookies["access-token"];
-    const accessSecret = process.env.JWT_ACCESS_SECRET;
-    console.log(accessToken);
-    try {
-      const data = verify(accessToken, accessSecret);
-      const {username, roles, permissions} = data;
-      req.username = username;
-    } catch {}
-    next();
-  });
+  app.use(isAuth);
 
   const server = new ApolloServer({
     typeDefs,

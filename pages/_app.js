@@ -13,9 +13,9 @@ function MyApp({ Component, pageProps }) {
     //try get before routing
   }, []);
 
-  // if(!user){
-    // return <Login setUser={setUser}/>
-  // }
+  if(!user){
+    return <Login setUser={setUser}/>
+  }
 
   return (
     <UserContext.Provider value={user}>

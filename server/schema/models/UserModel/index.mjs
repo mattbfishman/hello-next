@@ -24,19 +24,19 @@ const generateUserModel = (req, res) => ({
             reject((new Error("Username or Password is incorrect")));
           }
 
-          refreshToken = jwt.sign(
-            {  username, roles, permissions },
-            refreshSecret,
-            {
-              expiresIn: "7d"
-            }
-          );
+          // refreshToken = jwt.sign(
+          //   {  username, roles, permissions },
+          //   refreshSecret,
+          //   {
+          //     expiresIn: "7d"
+          //   }
+          // );
 
           accessToken = jwt.sign({ username, roles, permissions }, accessSecret, {
-            expiresIn: "15min"
+            expiresIn: "1hour"
           });
 
-          res.cookie("refresh-token", refreshToken);
+          // res.cookie("refresh-token", refreshToken);
           res.cookie("access-token", accessToken);
           
           resolve({username, roles, permissions})

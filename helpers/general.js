@@ -14,8 +14,9 @@ function getConfig(type = '', pageName) {
     return config && config[type] || PAGE_CONFIGS && PAGE_CONFIGS[type] || {};
 }
 
-async function makeRequest(name = '', variables = {}){
-    var queryName = QUERIES[name];
+async function makeRequest(name = '', variables = {}, token){
+    var queryName = QUERIES[name], 
+        requestHeaders = {};
 
     if(!graphQLClient){
         graphQLClient = new GraphQLClient(GRAPHQL_ENDPOINT, {
@@ -24,10 +25,12 @@ async function makeRequest(name = '', variables = {}){
         });
     }
 
-    console.log(variables);
+    if(token){
+        requestHeaders.Authorization = `Bearer ${token}`;
+    }
 
     if(queryName) {
-        return await graphQLClient.request(queryName, variables); 
+        return await graphQLClient.request(queryName, variables, requestHeaders); 
     } 
 
     return null;
